@@ -1,0 +1,38 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+}
+
+#container {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+#container .header-container {
+    padding: 100px 0 50px;
+}
+#container .header-container h1 {
+}
+#container .header-container div {
+}
+#container .header-container div label {
+}
+#container .header-container div label input {
+}
+#container .header-container button {
+}
+#container .main-container {
+    background: bisque;
+}
+#container .main-container .table {
+}
+#container .main-container .table tr {
+}
+#container .main-container .table tr th {
+}
+#container .main-container .table tr td {
+}
+#container .main-container .table tr button {
+}
