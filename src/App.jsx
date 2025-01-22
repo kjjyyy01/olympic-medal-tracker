@@ -7,9 +7,28 @@ const App = () => {
     const [countries, setCountries] = useState([]);
 
     const [countryName, setCountryName] = useState("");
-    const [gold, setGold] = useState("");
-    const [silver, setSilver] = useState("");
-    const [bronze, setBronze] = useState("");
+    const [gold, setGold] = useState(0);
+    const [silver, setSilver] = useState(0);
+    const [bronze, setBronze] = useState(0);
+
+    const addCountryHandler = () => {
+        const newCountry = {
+            id: uuid(),
+            countryName: countryName,
+            gold: gold,
+            silver: silver,
+            bronze: bronze,
+        };
+        setCountries([...countries, newCountry]);
+        setTalk("");
+    };
+    const deleteCountryHandler = (id) => {
+        const deleteCountry = countries.filter((country) => {
+            return country.id != id;
+        });
+        setCountries(deleteCountry);
+    };
+
     return (
         <div id="container">
             <header className="header-container">
@@ -69,22 +88,8 @@ const App = () => {
                         type="number"
                     />
                 </div>
-                <button
-                    onClick={() => {
-                        const newCountry = {
-                            id: uuid(),
-                            countryName: countryName,
-                            gold: gold,
-                            silver: silver,
-                            bronze: bronze,
-                        };
-                        setCountries([...countries, newCountry]);
-                        setTalk("");
-                    }}
-                >
-                    Add
-                </button>
-                <button>Update</button>
+                <Button onClick={addCountryHandler}>Add</Button>
+                <Button>Update</Button>
             </header>
             <main className="main-container">
                 {talk ? (
@@ -104,6 +109,9 @@ const App = () => {
                                     <CountryRow
                                         key={country.id}
                                         country={country}
+                                        deleteCountryHandler={
+                                            deleteCountryHandler
+                                        }
                                     />
                                 );
                             })}
@@ -117,9 +125,8 @@ const App = () => {
 
 export default App;
 
-const CountryRow = ({ country }) => {
-    const { countryName, gold, silver, bronze } = country;
-
+const CountryRow = ({ country, deleteCountryHandler }) => {
+    const { id, countryName, gold, silver, bronze } = country;
     return (
         <tr>
             <td>{countryName}</td>
@@ -127,8 +134,12 @@ const CountryRow = ({ country }) => {
             <td>{silver}</td>
             <td>{bronze}</td>
             <td>
-                <button>Delete</button>
+                <Button onClick={() => deleteCountryHandler(id)}>Delete</Button>
             </td>
         </tr>
     );
+};
+
+const Button = ({ children, onClick }) => {
+    return <button onClick={onClick}>{children}</button>;
 };
