@@ -43,6 +43,7 @@ const App = () => {
             silver: silver,
             bronze: bronze,
         };
+
         if ([countryName, gold, silver, bronze].some((element) => element.length === 0)) {
             alert("정보가 입력되지 않았습니다.");
             return;
@@ -52,6 +53,7 @@ const App = () => {
             return;
         }
         setCountries([newCountry, ...countries]);
+      
         setCountryName("");
         setGold(0);
         setSilver(0);
@@ -64,11 +66,6 @@ const App = () => {
         });
         setCountries(deleteCountry);
     };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-    };
-
     const countryNameHandler = (e) => {
         setCountryName(e.target.value);
     };
@@ -101,6 +98,7 @@ const App = () => {
         <div id="container">
             <header className="header-container">
                 <h1 className="title">2024 Paris Olympic</h1>
+
                 <form onSubmit={handleSubmit}>
                     <div>
                         <label id="Country Name">
