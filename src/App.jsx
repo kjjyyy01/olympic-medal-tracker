@@ -3,7 +3,7 @@ import { v4 as uuid } from "uuid";
 
 const App = () => {
     const tbodyTitle = ["Country Name", "Gold", "Silver", "Bronze", "Delete"];
-    const [talk, setTalk] = useState("추가된 정보가 없습니다.");
+
     const [countries, setCountries] = useState([]);
 
     const [countryName, setCountryName] = useState("");
@@ -19,9 +19,13 @@ const App = () => {
             silver: silver,
             bronze: bronze,
         };
-        setCountries([...countries, newCountry]);
-        setTalk("");
+        if (countries.some((c) => c.countryName === newCountry.countryName)) {
+            alert("중복된 국가는 추가할 수 없습니다.");
+            return;
+        }
+        setCountries([newCountry, ...countries]);
     };
+
     const deleteCountryHandler = (id) => {
         const deleteCountry = countries.filter((country) => {
             return country.id != id;
@@ -29,95 +33,80 @@ const App = () => {
         setCountries(deleteCountry);
     };
 
+    const countryNameHandler = (e) => {
+        setCountryName(e.target.value);
+    };
+    const goldHandler = (e) => {
+        setGold(e.target.value);
+        if (e.target.value < 0) {
+            alert("음수는 사용할 수 없습니다.");
+            setGold("");
+            return;
+        }
+    };
+    const silverHandler = (e) => {
+        setSilver(e.target.value);
+        if (e.target.value < 0) {
+            alert("음수는 사용할 수 없습니다.");
+            setSilver("");
+            return;
+        }
+    };
+    const bronzeHandler = (e) => {
+        setBronze(e.target.value);
+        if (e.target.value < 0) {
+            alert("음수는 사용할 수 없습니다.");
+            setBronze("");
+            return;
+        }
+    };
+
     return (
         <div id="container">
             <header className="header-container">
                 <h1 className="title">2024 Paris Olympic</h1>
-                <div>
-                    <label htmlFor="">Country Name</label>
-                    <input
-                        value={countryName}
-                        onChange={(e) => {
-                            setCountryName(e.target.value);
-                        }}
-                        type="text"
-                    />
-                </div>
-                <div>
-                    <label htmlFor="">Gold</label>
-                    <input
-                        value={gold}
-                        onChange={(e) => {
-                            setGold(e.target.value);
-                            if (e.target.value < 0) {
-                                alert("음수는 사용할 수 없습니다.");
-                                setGold("");
-                                return;
-                            }
-                        }}
-                        type="number"
-                    />
-                </div>
-                <div>
-                    <label htmlFor="">Silver</label>
-                    <input
-                        value={silver}
-                        onChange={(e) => {
-                            setSilver(e.target.value);
-                            if (e.target.value < 0) {
-                                alert("음수는 사용할 수 없습니다.");
-                                setSilver("");
-                                return;
-                            }
-                        }}
-                        type="number"
-                    />
-                </div>
-                <div>
-                    <label htmlFor="">Bronze</label>
-                    <input
-                        value={bronze}
-                        onChange={(e) => {
-                            setBronze(e.target.value);
-                            if (e.target.value < 0) {
-                                alert("음수는 사용할 수 없습니다.");
-                                setBronze("");
-                                return;
-                            }
-                        }}
-                        type="number"
-                    />
-                </div>
+                <form onSubmit={addCountryHandler}>
+                    <div>
+                        <label htmlFor="">Country Name</label>
+                        <input value={countryName} onChange={countryNameHandler} type="text" />
+                    </div>
+                    <div>
+                        <label htmlFor="">Gold</label>
+                        <input value={gold} onChange={goldHandler} type="number" />
+                    </div>
+                    <div>
+                        <label htmlFor="">Silver</label>
+                        <input value={silver} onChange={silverHandler} type="number" />
+                    </div>
+                    <div>
+                        <label htmlFor="">Bronze</label>
+                        <input value={bronze} onChange={bronzeHandler} type="number" />
+                    </div>
+                </form>
                 <Button onClick={addCountryHandler}>Add</Button>
                 <Button>Update</Button>
             </header>
             <main className="main-container">
-                {talk ? (
-                    <p>{talk}</p>
-                ) : (
-                    <table className="table" cellSpacing="0">
-                        <thead>
-                            <tr>
-                                {tbodyTitle.map((title) => {
-                                    return <th key={title}>{title}</th>;
-                                })}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {countries.map((country) => {
-                                return (
-                                    <CountryRow
-                                        key={country.id}
-                                        country={country}
-                                        deleteCountryHandler={
-                                            deleteCountryHandler
-                                        }
-                                    />
-                                );
+                <table className="table" cellSpacing="0">
+                    <thead>
+                        <tr>
+                            {tbodyTitle.map((title) => {
+                                return <th key={title}>{title}</th>;
                             })}
-                        </tbody>
-                    </table>
-                )}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {countries.map((country) => {
+                            return (
+                                <CountryRow
+                                    key={country.id}
+                                    country={country}
+                                    deleteCountryHandler={deleteCountryHandler}
+                                />
+                            );
+                        })}
+                    </tbody>
+                </table>
             </main>
         </div>
     );
