@@ -8,6 +8,7 @@ React를 활용해서 CRUD기능을 구현한 올림픽 메달 트래커 만들�
 <br />
 
 ### 💬 배포 링크
+https://olympic-medal-tracker-ye32.vercel.app/
 
 ### ✨ 화면 구성
 ![Image](https://github.com/user-attachments/assets/ccfe56a0-60e4-4ad6-8c53-15223097baf2)
