@@ -1,3 +1,4 @@
+import "./App.css";
 import React, { useState } from "react";
 import { v4 as uuid } from "uuid";
 
@@ -102,53 +103,50 @@ const App = () => {
             <header className="header-container">
                 <h1 className="title">2024 Paris Olympic</h1>
                 <form onSubmit={handleSubmit}>
-                    <div>
-                        <label id="Country Name">
-                            Country
-                            <input id="Country Name" value={countryName} onChange={countryNameHandler} type="text" />
-                        </label>
-                    </div>
-                    <div>
-                        <label id="Gold">
-                            Gold
-                            <input id="Gold" value={gold} onChange={goldHandler} type="number" />
-                        </label>
-                    </div>
-                    <div>
-                        <label id="Silver">
-                            Silver
-                            <input value={silver} onChange={silverHandler} type="number" />
-                        </label>
-                    </div>
-                    <div>
-                        <label id="Bronze">
-                            Bronze
-                            <input value={bronze} onChange={bronzeHandler} type="number" />
-                        </label>
-                    </div>
+                    <label>
+                        Country
+                        <input value={countryName} onChange={countryNameHandler} type="text" />
+                    </label>
+
+                    <label>
+                        Gold
+                        <input value={gold} onChange={goldHandler} type="number" />
+                    </label>
+
+                    <label>
+                        Silver
+                        <input value={silver} onChange={silverHandler} type="number" />
+                    </label>
+
+                    <label>
+                        Bronze
+                        <input value={bronze} onChange={bronzeHandler} type="number" />
+                    </label>
+                    <Button onClick={addCountryHandler}>Add</Button>
+                    <Button onClick={updateCountryHandler}>Update</Button>
                 </form>
-                <Button onClick={addCountryHandler}>Add</Button>
-                <Button onClick={updateCountryHandler}>Update</Button>
             </header>
             <main className="main-container">
-                <table className="table" cellSpacing="0">
-                    <thead>
-                        <tr>
-                            {tbodyTitle.map((title) => {
-                                return <th key={title}>{title}</th>;
-                            })}
-                        </tr>
-                    </thead>
+                <table className="table">
+                    {countries.length > 0 ? (
+                        <thead>
+                            <tr>
+                                {tbodyTitle.map((title) => (
+                                    <th key={title}>{title}</th>
+                                ))}
+                            </tr>
+                        </thead>
+                    ) : (
+                        <p>입력된 정보가 없습니다.</p>
+                    )}
                     <tbody>
-                        {countries.map((country) => {
-                            return (
-                                <CountryRow
-                                    key={country.id}
-                                    country={country}
-                                    deleteCountryHandler={deleteCountryHandler}
-                                />
-                            );
-                        })}
+                        {countries.map((country) => (
+                            <CountryRow
+                                key={country.id}
+                                country={country}
+                                deleteCountryHandler={deleteCountryHandler}
+                            />
+                        ))}
                     </tbody>
                 </table>
             </main>
