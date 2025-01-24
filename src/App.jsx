@@ -17,6 +17,7 @@ const App = () => {
         e.preventDefault();
     };
 
+    //원래있던 리스트에 대한 매달 개수를 업데이트 시켜주는 함수
     const updateCountryHandler = () => {
         const countryIndex = countries.findIndex((c) => c.countryName === countryName);
 
@@ -42,6 +43,7 @@ const App = () => {
         setBronze(0);
     };
 
+    //입력한 값으로 목록에 추가시켜주는 함수
     const addCountryHandler = () => {
         const newCountry = {
             id: uuid(),
@@ -51,10 +53,12 @@ const App = () => {
             bronze: bronze,
         };
 
+        //정보가 입력되지 않으면 알람을 띄워주는 로직
         if ([countryName, gold, silver, bronze].some((element) => element.length === 0)) {
             alert("정보가 입력되지 않았습니다.");
             return;
         }
+        //중복된 국가를 추가하려고 하면 알람을 띄워주는 로직
         if (countries.some((c) => c.countryName === newCountry.countryName)) {
             alert("중복된 국가는 추가할 수 없습니다.");
             return;
@@ -67,6 +71,7 @@ const App = () => {
         setBronze(0);
     };
 
+    //목록에 추가된 항목을 id값을 비교해서 삭제시키는 로직
     const deleteCountryHandler = (id) => {
         const deleteCountry = countries.filter((country) => {
             return country.id != id;
@@ -78,6 +83,7 @@ const App = () => {
     };
     const goldHandler = (e) => {
         setGold(+e.target.value);
+        //메달 개수에 음수를 넣으면 알람을 띄워주는 로직
         if (e.target.value < 0) {
             alert("음수는 사용할 수 없습니다.");
             setGold("");
