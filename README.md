@@ -39,10 +39,6 @@ https://olympic-medal-tracker-ye32.vercel.app/
 </div>
 
 
-<br />
-
-## 🤔 트러블 슈팅
-- 
 
 <br />
 
