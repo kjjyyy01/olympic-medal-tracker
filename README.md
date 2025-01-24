@@ -1,11 +1,9 @@
-# 2024 Paris Olympic Medal Tracker
-
 </div> 
 
 ## 📝 소개
 📅개발 기간: 2025.1.21 ~ 2025.01.24
 
-개인 과제 React를 활용해서 CRUD기능을 구현한 올림픽 메달 트래커 만들기입니다.<br />
+React를 활용해서 CRUD기능을 구현한 올림픽 메달 트래커 만들기<br />
 
 <br />
 
@@ -30,7 +28,6 @@
 
 ### Structure
 <div>
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" height="40" alt="html5 logo"  />
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" height="40" alt="css3 logo"  />
 <div />
 <br />
@@ -38,7 +35,6 @@
 ### Development
 <div>
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" height="40" alt="react logo"  />
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" height="40" alt="javascript logo"  />
 </div>
 
 
@@ -52,16 +48,12 @@
 ## 📁 프로젝트 구조
 ```markdown
 📁
-|- css/
-|   |- card-style.css
-|   |- modal.css
-|   |- style.css  
-|
-|- js/
-|   |- modal.js
-|   |- api.js
-|   |- search.js
-|   |- main.js
+|- src/
+|   |- img/
+|   |- App.css
+|   |- App.jsx
+|   |- index.css
+|   |- main.jsx
 |
 |- index.html
 |- README.md
