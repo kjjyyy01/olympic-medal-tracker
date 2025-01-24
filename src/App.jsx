@@ -11,6 +11,10 @@ const App = () => {
     const [silver, setSilver] = useState(0);
     const [bronze, setBronze] = useState(0);
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    };
+
     const updateCountryHandler = () => {
         const countryIndex = countries.findIndex((c) => c.countryName === countryName);
 
@@ -23,9 +27,9 @@ const App = () => {
 
         updatedCountries[countryIndex] = {
             ...updatedCountries[countryIndex],
-            gold: parseInt(gold, 10),
-            silver: parseInt(silver, 10),
-            bronze: parseInt(bronze, 10),
+            gold: parseInt(gold, 10) || 0,
+            silver: parseInt(silver, 10) || 0,
+            bronze: parseInt(bronze, 10) || 0,
         };
 
         setCountries(updatedCountries);
@@ -54,7 +58,7 @@ const App = () => {
             return;
         }
         setCountries([newCountry, ...countries]);
-      
+
         setCountryName("");
         setGold(0);
         setSilver(0);
@@ -71,7 +75,7 @@ const App = () => {
         setCountryName(e.target.value);
     };
     const goldHandler = (e) => {
-        setGold(e.target.value);
+        setGold(+e.target.value);
         if (e.target.value < 0) {
             alert("음수는 사용할 수 없습니다.");
             setGold("");
@@ -79,7 +83,7 @@ const App = () => {
         }
     };
     const silverHandler = (e) => {
-        setSilver(e.target.value);
+        setSilver(+e.target.value);
         if (e.target.value < 0) {
             alert("음수는 사용할 수 없습니다.");
             setSilver("");
@@ -87,7 +91,7 @@ const App = () => {
         }
     };
     const bronzeHandler = (e) => {
-        setBronze(e.target.value);
+        setBronze(+e.target.value);
         if (e.target.value < 0) {
             alert("음수는 사용할 수 없습니다.");
             setBronze("");
@@ -99,23 +103,19 @@ const App = () => {
         <div id="container">
             <header className="header-container">
                 <h1 className="title">2024 Paris Olympic</h1>
-
                 <form onSubmit={handleSubmit}>
                     <label>
                         Country
                         <input value={countryName} onChange={countryNameHandler} type="text" />
                     </label>
-
                     <label>
                         Gold
                         <input value={gold} onChange={goldHandler} type="number" />
                     </label>
-
                     <label>
                         Silver
                         <input value={silver} onChange={silverHandler} type="number" />
                     </label>
-
                     <label>
                         Bronze
                         <input value={bronze} onChange={bronzeHandler} type="number" />
@@ -134,9 +134,7 @@ const App = () => {
                                 ))}
                             </tr>
                         </thead>
-                    ) : (
-                        <p>입력된 정보가 없습니다.</p>
-                    )}
+                    ) : null}
                     <tbody>
                         {countries.map((country) => (
                             <CountryRow
