@@ -1,5 +1,7 @@
 import "./App.css";
 import React, { useState } from "react";
+import Button from "../components/Button";
+import CountryRow from "../components/CountryRow";
 import { v4 as uuid } from "uuid";
 
 const App = () => {
@@ -141,6 +143,7 @@ const App = () => {
                                 key={country.id}
                                 country={country}
                                 deleteCountryHandler={deleteCountryHandler}
+                                Button={Button}
                             />
                         ))}
                     </tbody>
@@ -151,22 +154,3 @@ const App = () => {
 };
 
 export default App;
-
-const CountryRow = ({ country, deleteCountryHandler }) => {
-    const { id, countryName, gold, silver, bronze } = country;
-    return (
-        <tr>
-            <td>{countryName}</td>
-            <td>{gold}</td>
-            <td>{silver}</td>
-            <td>{bronze}</td>
-            <td>
-                <Button onClick={() => deleteCountryHandler(id)}>Delete</Button>
-            </td>
-        </tr>
-    );
-};
-
-const Button = ({ children, onClick }) => {
-    return <button onClick={onClick}>{children}</button>;
-};
