@@ -46,7 +46,8 @@ https://olympic-medal-tracker-ye32.vercel.app/
 ```markdown
 📁
 |- components/
-|   |- CountryRow.jsx
+|   |- CountryTable.jsx
+|   |- CountryForm.jsx
 |   |- Button.jsx
 |- src/
 |   |- img/
